@@ -29,6 +29,7 @@ namespace SAPConnector
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.description = new System.Windows.Forms.ComboBox();
             this.label_host = new System.Windows.Forms.Label();
             this.label_system_id = new System.Windows.Forms.Label();
@@ -336,6 +337,7 @@ namespace SAPConnector
             this.Controls.Add(this.description);
             this.Font = new System.Drawing.Font("Arial", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Main";
             this.Text = "SAPConnector";
             this.Load += new System.EventHandler(this.Form_Main_Load);

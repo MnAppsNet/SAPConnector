@@ -105,7 +105,7 @@ namespace SAPConnector
             label_guid.ResetText();
             host.ResetText();
             system_id.ResetText();
-            language.ResetText();
+            language.Text = "EN";
             username.ResetText();
             checkbox_save_password.Checked = false;
             if (clear_password) password.ResetText();
@@ -251,6 +251,7 @@ namespace SAPConnector
         private void button_delete_Click(object sender, EventArgs e)
         {
             if (label_guid.Text == "") return;
+            if (description.Text == "" || description.Text == CONNECTON_PLACEHOLDER) return;
             try
             {
                 Connection connection = conf.connections.First(item => item.guid == label_guid.Text);
@@ -265,14 +266,7 @@ namespace SAPConnector
                 loadConnections();
                 conf.save();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(
-                    ex.Message,
-                    "Error",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Error);
-            }
+            catch { }
         }
 
         private void button_shortcut_Click(object sender, EventArgs e)
