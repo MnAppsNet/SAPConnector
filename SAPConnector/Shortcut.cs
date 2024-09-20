@@ -93,6 +93,8 @@ namespace SAPConnector
                 string current_executable = System.Reflection.Assembly.GetExecutingAssembly().Location;
                 string app_data = System.Environment.GetFolderPath(Config.APP_DATA_PATH);
                 string executable_path = System.IO.Path.Combine(app_data, Config.APP_FOLDER, EXECUTABLE_FILE);
+                if (System.IO.File.Exists(executable_path))
+                    System.IO.File.Delete(executable_path);
                 System.IO.File.Copy(current_executable, executable_path);
                 return true;
             }catch (Exception e)
