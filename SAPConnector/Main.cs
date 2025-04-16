@@ -103,6 +103,8 @@ namespace SAPConnector
             description.SelectedItem = null;
             description.Text = CONNECTON_PLACEHOLDER;
             label_guid.ResetText();
+            notes.ResetText();
+            process.ResetText();
             host.ResetText();
             system_id.ResetText();
             language.Text = "EN";
@@ -134,6 +136,8 @@ namespace SAPConnector
             system_id.Text = connection.system_id;
             language.Text = connection.language;
             username.Text = connection.username;
+            notes.Text = connection.notes;
+            process.Text = connection.process;
             if (connection.password != "")
             {
                 password.Text = Security.Decrypt(connection.password);
@@ -168,6 +172,8 @@ namespace SAPConnector
                 connection.client = client.Value.ToString();
                 connection.username = username.Text;
                 connection.password = ((checkbox_save_password.Checked) ? (Security.Encrypt(password.Text)) : (""));
+                connection.notes = notes.Text;
+                connection.process = process.Text;
             }
             catch
             {
@@ -181,7 +187,9 @@ namespace SAPConnector
                     client.Value.ToString(),
                     language.Text,
                     username.Text,
-                    ((checkbox_save_password.Checked) ? (Security.Encrypt(password.Text)) : ("")));
+                    ((checkbox_save_password.Checked) ? (Security.Encrypt(password.Text)) : ("")),
+                    notes.Text,
+                    process.Text);
                 conf.connections.Add(connection);
             }
             clearScreen(checkbox_save_password.Checked);
@@ -275,6 +283,17 @@ namespace SAPConnector
             if (!(description.SelectedItem is Connection)) return;
             Connection connection = (Connection)description.SelectedItem;
             Shortcut.Create(connection.description, connection.guid);
+        }
+
+        private void button_execute_Click(object sender, EventArgs e)
+        {
+            if (process.Text == "") return;
+            System.Diagnostics.Process cmd = new System.Diagnostics.Process();
+            System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
+            startInfo.WindowStyle = System.Diagnostics.ProcessWindowStyle.Normal;
+            startInfo.FileName = process.Text;
+            cmd.StartInfo = startInfo;
+            cmd.Start();
         }
     }
 }

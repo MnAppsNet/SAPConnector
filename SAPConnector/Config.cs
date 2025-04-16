@@ -10,7 +10,8 @@ namespace SAPConnector
         public Connection(string guid, string description, 
                     string host, string system_id, string instance,
                     string client, string language, 
-                    string username, string password = "") { 
+                    string username, string password = "", string notes = "",
+                    string process = "") { 
             this.guid = guid; 
             this.description = description; 
             this.host = host; 
@@ -19,7 +20,9 @@ namespace SAPConnector
             this.client = client; 
             this.language = language; 
             this.username = username; 
-            this.password = password; 
+            this.password = password;
+            this.notes = notes;
+            this.process = process;
         }
         public string guid { get; set; }
         public string description { get; set; }
@@ -30,6 +33,8 @@ namespace SAPConnector
         public string language { get; set; }
         public string username { get; set; }
         public string password { get; set; }
+        public string notes { get; set; }
+        public string process { get; set; }
         public override string ToString()
         {
             return description;
